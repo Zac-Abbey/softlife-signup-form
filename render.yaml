@@ -1,0 +1,8 @@
+# filepath: render.yaml
+services:
+  - type: web
+    name: softlife-signup-form
+    env: python
+    buildCommand: ""
+    startCommand: "gunicorn main:app"
+    plan: free
