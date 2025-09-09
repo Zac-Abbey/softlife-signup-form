@@ -1,0 +1,61 @@
+<!-- Signup Form Page -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup Form</title>
+  <!-- Import Tailwind CSS for utility-first styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+  <!-- Error Modal: Displayed if backend passes an error variable. Covers the screen and shows error message. -->
+  {% if error %}
+    <div id="errorModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+      <div class="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+        <!-- Error title -->
+        <div class="text-red-600 text-lg font-semibold mb-2">Error</div>
+        <!-- Error message from backend -->
+        <div class="mb-4">{{ error }}</div>
+        <!-- Okay button closes modal and resets form fields -->
+        <button onclick="document.getElementById('errorModal').style.display='none'; document.querySelector('form').reset();" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Okay</button>
+      </div>
+    </div>
+  {% endif %}
+  <!-- Success Modal: Displayed if backend passes a message variable. Covers the screen and shows success message. -->
+  {% if message %}
+    <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+      <div class="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+        <!-- Success title -->
+        <div class="text-green-600 text-lg font-semibold mb-2">Success</div>
+        <!-- Success message from backend -->
+        <div class="mb-4">{{ message }}</div>
+        <!-- Okay button closes modal and resets form fields -->
+        <button onclick="document.getElementById('successModal').style.display='none'; document.querySelector('form').reset();" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Okay</button>
+      </div>
+    </div>
+  {% endif %}
+  <!-- Main Form Container: Centered card for the signup form -->
+  <div class="bg-white p-8 rounded-2xl shadow-lg w-96">
+    <h2 class="text-2xl font-bold mb-4 text-center">Signup Form</h2>
+    <!-- Signup Form: collects user data and posts to /submit -->
+    <form action="/submit" method="POST" class="space-y-4">
+      <!-- Full Name input field -->
+      <input type="text" name="full_name" placeholder="Full Name" required class="w-full px-4 py-2 border rounded-lg">
+      <!-- Phone Number input field -->
+      <input type="tel" name="phone_number" placeholder="Phone Number" required class="w-full px-4 py-2 border rounded-lg">
+      <!-- Email input field -->
+      <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border rounded-lg">
+      <!-- Sex selection dropdown -->
+      <select name="sex" required class="w-full px-4 py-2 border rounded-lg">
+        <option value="">Select Sex</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Prefer not to say">Prefer not to say</option>
+      </select>
+      <!-- Birthday input as calendar picker -->
+      <input type="date" name="birthday" required class="w-full px-4 py-2 border rounded-lg">
+      <!-- Submit button for the form -->
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
