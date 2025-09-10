@@ -1,5 +1,6 @@
 # Main application file for the Signup Form project
 # This Flask app renders HTML templates for the user interface and handles form submissions, admin dashboard, and CSV export.
+import io
 import csv
 from flask import Response
 from flask import session
@@ -110,20 +111,24 @@ def delete(user_id):
 def export():
     users = UserForm.query.all()
 
-    # Function to generate CSV data in memory
-    def generate():
-        data = [["Full Name", "Phone Number", "Email", "Sex", "Birthday"]]
-        for u in users:
-            data.append([u.full_name, u.phone_number, u.email, u.sex, u.birthday])
-        output=[]
-        writer=csv.writer(output, quoting=csv.QUOTE_MINIMAL)
-        for row in data:
-            writer.writerow(row)
-        return "\n".join([",".join(row) for row in data])
+    # create an in-memory string buffer
+    output = io.StringIO()
+    writer = csv.writer(output, quoting=csv.QUOTE_MINIMAL)
+
+    # Writer header
+    writer.writerow(["Full Name", "Phone Number", "Email","Sex","Birthday", "Timestamp"])
     
+    # Write data rows
+    for u in users:
+        writer.writerow([u.full_name, u.phone_number, u.email, u.sex, u.birthday, u.timestamp])
+
+    # Move buffer cursor to the beginning
+    output.seek(0)  # Move to the start of the StringIO buffer
+
+       
     # Send CSV file as response
     return Response(
-        generate(),
+        output.getvalue(),
         mimetype="text/csv",
         headers={"Content-Disposition": "attachment;filename=form_data.csv"},
     )

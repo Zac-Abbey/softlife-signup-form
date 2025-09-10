@@ -39,20 +39,25 @@
     <!-- Signup Form: collects user data and posts to /submit -->
     <form action="/submit" method="POST" class="space-y-4">
       <!-- Full Name input field -->
-      <input type="text" name="full_name" placeholder="Full Name" required class="w-full px-4 py-2 border rounded-lg">
+      <label for="full_name" class="block font-semibold mb-1">Full Name</label>
+      <input type="text" id="full_name" name="full_name" placeholder="Full Name" required class="w-full px-4 py-2 border rounded-lg">
       <!-- Phone Number input field -->
-      <input type="tel" name="phone_number" placeholder="Phone Number" required class="w-full px-4 py-2 border rounded-lg">
+      <label for="phone_number" class="block font-semibold mb-1">Phone Number</label>
+      <input type="tel" id="phone_number" name="phone_number" placeholder="Phone Number" required class="w-full px-4 py-2 border rounded-lg">
       <!-- Email input field -->
-      <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border rounded-lg">
+      <label for="email" class="block font-semibold mb-1">Email</label>
+      <input type="email" id="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border rounded-lg">
       <!-- Sex selection dropdown -->
-      <select name="sex" required class="w-full px-4 py-2 border rounded-lg">
+      <label for="sex" class="block font-semibold mb-1">Sex</label>
+      <select id="sex" name="sex" required class="w-full px-4 py-2 border rounded-lg">
         <option value="">Select Sex</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Prefer not to say">Prefer not to say</option>
       </select>
       <!-- Birthday input as calendar picker -->
-      <input type="date" name="birthday" required class="w-full px-4 py-2 border rounded-lg">
+      <label for="birthday" class="block font-semibold mb-1">Your Last Birthday</label>
+      <input type="date" id="birthday" name="birthday" required class="w-full px-4 py-2 border rounded-lg">
       <!-- Submit button for the form -->
       <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Submit</button>
     </form>
